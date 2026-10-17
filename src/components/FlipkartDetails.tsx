@@ -1,4 +1,4 @@
-import { ShoppingCart, Zap, Star, Tag, ShieldCheck, RotateCcw, Truck } from 'lucide-react';
+import { ShoppingCart, Zap, Star, Tag, ShieldCheck, RotateCcw, Truck, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
@@ -59,6 +59,14 @@ export function FlipkartDetails({
   const go = (d: number) => { setZoom(false); setIdx((i) => (i + d + imgs.length) % imgs.length); };
   const off = Math.round((1 - price / m.list) * 100);
   const deliveryDate = new Date(Date.now() + 3 * 86400000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  const [pincode, setPincode] = useState('');
+  const [pinMsg, setPinMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const checkPincode = () => {
+    if (pincode.length !== 6) { setPinMsg({ ok: false, text: 'Please enter a valid 6-digit pincode' }); return; }
+    const days = 2 + (Number(pincode[5]) % 4);
+    const date = new Date(Date.now() + days * 86400000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    setPinMsg({ ok: true, text: `Delivery to ${pincode} by ${date} · Free delivery available` });
+  };
   const table: [string, string][] = [
     ['Model Name', `Private Flight ${w.name}`],
     ['Dial Color', w.details[0]],
@@ -101,6 +109,20 @@ export function FlipkartDetails({
               <span className="fk-off">{off}% off</span>
             </div>
             <div className="fk-delivery">
+              <div className="fk-pincode">
+                <MapPin size={16} />
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  placeholder="Enter delivery pincode"
+                  value={pincode}
+                  onChange={(e) => { setPincode(e.target.value.replace(/\D/g, '')); setPinMsg(null); }}
+                  aria-label="Delivery pincode"
+                />
+                <button type="button" onClick={checkPincode}>Check</button>
+              </div>
+              {pinMsg && <p className={`fk-pin-msg ${pinMsg.ok ? 'is-ok' : 'is-err'}`}>{pinMsg.text}</p>}
               <div className="fk-delivery-row"><Truck size={16} /><span>Delivery by <b>{deliveryDate}</b> <span className="fk-delivery-free">| Free</span></span></div>
               <div className="fk-delivery-row"><RotateCcw size={16} /><span><b>7 days</b> Replacement Policy</span></div>
               <div className="fk-delivery-row"><ShieldCheck size={16} /><span><b>2 Year</b> Manufacturer Warranty</span></div>

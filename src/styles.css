@@ -917,6 +917,15 @@ body:has(.watch-page) { background: var(--midnight-sky); }
 .fk-delivery-row svg { color: var(--fk-green); flex-shrink: 0; }
 .fk-delivery-row b { font-weight: 700; }
 .fk-delivery-free { color: var(--fk-green); font-weight: 700; }
+.fk-pincode { display: flex; align-items: center; gap: .5rem; border-bottom: 1px solid var(--fk-line); padding-bottom: .5rem; }
+.fk-pincode svg { color: var(--fk-muted); flex-shrink: 0; }
+.fk-pincode input { flex: 1; border: 0; outline: none; background: transparent; font: inherit; font-size: .88rem; color: var(--fk-ink); min-width: 0; }
+.fk-pincode input::placeholder { color: var(--fk-muted); }
+.fk-pincode button { border: 0; background: none; font: inherit; font-size: .85rem; font-weight: 500; color: var(--fk-blue); cursor: pointer; padding: 0; }
+.fk-pincode button:hover { text-decoration: underline; }
+.fk-pin-msg { font-size: .8rem; margin: 0; }
+.fk-pin-msg.is-ok { color: var(--fk-green); }
+.fk-pin-msg.is-err { color: oklch(0.55 0.2 25); }
 .fk-section { margin-top: 1.75rem; }
 .fk-section h4 { font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; font-weight: 600; margin-bottom: .75rem; display: flex; justify-content: space-between; }
 .fk-sizes { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--fk-line); }
