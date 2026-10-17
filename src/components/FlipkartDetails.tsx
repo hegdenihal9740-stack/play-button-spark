@@ -59,6 +59,14 @@ export function FlipkartDetails({
   const go = (d: number) => { setZoom(false); setIdx((i) => (i + d + imgs.length) % imgs.length); };
   const off = Math.round((1 - price / m.list) * 100);
   const deliveryDate = new Date(Date.now() + 3 * 86400000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  const [pincode, setPincode] = useState('');
+  const [pinMsg, setPinMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const checkPincode = () => {
+    if (pincode.length !== 6) { setPinMsg({ ok: false, text: 'Please enter a valid 6-digit pincode' }); return; }
+    const days = 2 + (Number(pincode[5]) % 4);
+    const date = new Date(Date.now() + days * 86400000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    setPinMsg({ ok: true, text: `Delivery to ${pincode} by ${date} · Free delivery available` });
+  };
   const table: [string, string][] = [
     ['Model Name', `Private Flight ${w.name}`],
     ['Dial Color', w.details[0]],
