@@ -911,6 +911,7 @@ body:has(.watch-page) { background: var(--midnight-sky); }
 .fk-price { font-family: "Roboto", sans-serif; font-size: 2rem; font-weight: 700; color: var(--fk-ink); }
 .fk-price-row s { font-size: .95rem; }
 .fk-off { font-size: .95rem; font-weight: 700; color: var(--fk-green); }
+.fk-special { margin-top: 1.25rem; font-size: .85rem; font-weight: 500; color: var(--fk-green); }
 .fk-delivery { margin-top: 1.25rem; font-size: .88rem; display: grid; gap: .55rem; }
 .fk-delivery-row { display: flex; align-items: center; gap: .6rem; }
 .fk-delivery-row svg { color: var(--fk-green); flex-shrink: 0; }

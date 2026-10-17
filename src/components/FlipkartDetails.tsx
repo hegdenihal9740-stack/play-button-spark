@@ -58,6 +58,7 @@ export function FlipkartDetails({
   const [zoom, setZoom] = useState(false);
   const go = (d: number) => { setZoom(false); setIdx((i) => (i + d + imgs.length) % imgs.length); };
   const off = Math.round((1 - price / m.list) * 100);
+  const deliveryDate = new Date(Date.now() + 3 * 86400000).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
   const table: [string, string][] = [
     ['Model Name', `Private Flight ${w.name}`],
     ['Dial Color', w.details[0]],
