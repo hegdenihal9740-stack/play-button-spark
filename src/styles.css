@@ -886,7 +886,7 @@ body:has(.watch-page) { background: var(--midnight-sky); }
 :root { --fk-bg: oklch(1 0 0); --fk-ink: oklch(0.18 0.01 60); --fk-muted: oklch(0.55 0.01 60); --fk-line: oklch(0.91 0.01 80); --fk-blue: oklch(0.62 0.11 75); --fk-gold: oklch(0.62 0.11 75); --fk-soft: oklch(0.975 0.008 80); --fk-green: oklch(0.52 0.12 155); --fk-rating: oklch(0.5 0.12 155); }
 .az-more { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--fk-ink); background: var(--fk-bg); padding: .65rem; border: 1px solid var(--fk-line); }
 .az-more:hover { color: var(--fk-gold); }
-.fk-panel { background: var(--fk-bg) !important; color: var(--fk-ink); max-width: 1040px !important; width: 95vw; max-height: 92vh; overflow-y: auto; padding: 0 !important; border-radius: 0; border: 1px solid var(--fk-line); font-family: "Karla", sans-serif; }
+.fk-panel { background: var(--fk-bg) !important; color: var(--fk-ink); max-width: 1040px !important; width: 95vw; max-height: 92vh; overflow-y: auto; padding: 0 !important; border-radius: 0; border: 1px solid var(--fk-line); font-family: "Roboto", "Karla", sans-serif; }
 .fk-grid { display: grid; grid-template-columns: 1fr; }
 @media (min-width: 768px) { .fk-grid { grid-template-columns: 1fr 1fr; } .fk-left { position: sticky; top: 0; align-self: start; height: 92vh; } }
 .fk-left { background: var(--fk-soft); display: flex; flex-direction: column; padding: 1.5rem; position: relative; }
@@ -901,14 +901,21 @@ body:has(.watch-page) { background: var(--midnight-sky); }
 .fk-thumb-vid { display: grid; place-items: center; width: 100%; height: 100%; color: var(--fk-gold); }
 .fk-right { padding: 2.5rem 2rem; display: flex; flex-direction: column; }
 .fk-brand { color: var(--fk-gold); font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; }
-.fk-title { font-family: "Cormorant Garamond", serif; font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 400; line-height: 1; margin-top: .6rem; color: var(--fk-ink); }
-.fk-subtitle { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 1.15rem; color: var(--fk-muted); margin-top: .4rem; }
+.fk-title { font-family: "Roboto", sans-serif; font-size: clamp(1.4rem, 3vw, 1.8rem); font-weight: 500; line-height: 1.25; margin-top: .6rem; color: var(--fk-ink); }
+.fk-subtitle { font-family: "Roboto", sans-serif; font-size: .95rem; color: var(--fk-muted); margin-top: .4rem; }
 .fk-rating-row { display: flex; align-items: center; gap: .4rem; margin-top: 1rem; font-size: .82rem; color: var(--fk-gold); }
+.fk-rating-chip { display: inline-flex; align-items: center; gap: .25rem; background: var(--fk-rating); color: oklch(1 0 0); font-size: .78rem; font-weight: 500; border-radius: 3px; padding: .15rem .45rem; }
 .fk-rating-row span:first-of-type { color: var(--fk-ink); font-weight: 600; }
 .fk-muted { color: var(--fk-muted); font-weight: 400; }
 .fk-price-row { display: flex; align-items: baseline; gap: .8rem; margin-top: 1.5rem; padding: 1.2rem 0; border-top: 1px solid var(--fk-line); border-bottom: 1px solid var(--fk-line); }
-.fk-price { font-family: "Cormorant Garamond", serif; font-size: 2.2rem; font-weight: 500; }
-.fk-off { margin-left: auto; font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--fk-gold); border: 1px solid var(--fk-gold); padding: .25rem .6rem; }
+.fk-price { font-family: "Roboto", sans-serif; font-size: 2rem; font-weight: 700; color: var(--fk-ink); }
+.fk-price-row s { font-size: .95rem; }
+.fk-off { font-size: .95rem; font-weight: 700; color: var(--fk-green); }
+.fk-delivery { margin-top: 1.25rem; font-size: .88rem; display: grid; gap: .55rem; }
+.fk-delivery-row { display: flex; align-items: center; gap: .6rem; }
+.fk-delivery-row svg { color: var(--fk-green); flex-shrink: 0; }
+.fk-delivery-row b { font-weight: 700; }
+.fk-delivery-free { color: var(--fk-green); font-weight: 700; }
 .fk-section { margin-top: 1.75rem; }
 .fk-section h4 { font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; font-weight: 600; margin-bottom: .75rem; display: flex; justify-content: space-between; }
 .fk-sizes { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--fk-line); }
