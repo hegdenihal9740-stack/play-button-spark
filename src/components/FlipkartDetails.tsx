@@ -1,4 +1,4 @@
-import { ShoppingCart, Zap, Star, Tag, ShieldCheck, RotateCcw, Truck } from 'lucide-react';
+import { ShoppingCart, Zap, Star, Tag, ShieldCheck, RotateCcw, Truck, MapPin } from 'lucide-react';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
@@ -101,6 +101,20 @@ export function FlipkartDetails({
               <span className="fk-off">{off}% off</span>
             </div>
             <div className="fk-delivery">
+              <div className="fk-pincode">
+                <MapPin size={16} />
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  placeholder="Enter delivery pincode"
+                  value={pincode}
+                  onChange={(e) => { setPincode(e.target.value.replace(/\D/g, '')); setPinMsg(null); }}
+                  aria-label="Delivery pincode"
+                />
+                <button type="button" onClick={checkPincode}>Check</button>
+              </div>
+              {pinMsg && <p className={`fk-pin-msg ${pinMsg.ok ? 'is-ok' : 'is-err'}`}>{pinMsg.text}</p>}
               <div className="fk-delivery-row"><Truck size={16} /><span>Delivery by <b>{deliveryDate}</b> <span className="fk-delivery-free">| Free</span></span></div>
               <div className="fk-delivery-row"><RotateCcw size={16} /><span><b>7 days</b> Replacement Policy</span></div>
               <div className="fk-delivery-row"><ShieldCheck size={16} /><span><b>2 Year</b> Manufacturer Warranty</span></div>
