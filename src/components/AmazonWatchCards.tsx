@@ -5,13 +5,7 @@ import { ScanLine, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { cart, prices } from '@/lib/cart';
 import { watches, type WatchTone } from '@/lib/watches';
-
-const meta: Record<WatchTone, { list: number; rating: number; reviews: number; bought: string; badge?: string; stock?: number; specs: string[] }> = {
-  steel: { list: 14900, rating: 4.7, reviews: 1842, bought: '500+', badge: 'Best Seller', specs: ['41mm case', '200m water resistant', 'Automatic movement'] },
-  black: { list: 16900, rating: 4.6, reviews: 963, bought: '200+', badge: 'Limited time deal', stock: 3, specs: ['42mm case', 'Sapphire crystal', 'Skeleton dial'] },
-  gold: { list: 21500, rating: 4.8, reviews: 1204, bought: '300+', badge: 'Overall Pick', specs: ['40mm case', 'Chronograph', '100m water resistant'] },
-  rosegold: { list: 18900, rating: 4.5, reviews: 712, bought: '100+', stock: 5, specs: ['38mm case', 'Leather strap', 'Quartz movement'] },
-};
+import { cardMeta as meta } from '@/lib/watch-meta';
 
 const usd = (n: number) => n.toLocaleString('en-US');
 
@@ -59,7 +53,7 @@ export function WatchProductCard({ tone }: { tone: WatchTone }) {
           <Link to="/watches/$watchId" params={{ watchId: w.id }} search={{ tryon: true }} className="az-tryon"><ScanLine size={14} /> Try on</Link>
           <button type="button" className="az-more" onClick={() => setMore(true)}>Details</button>
         </div>
-        <FlipkartDetails tone={w.id} open={more} onOpenChange={setMore} list={m.list} rating={m.rating} reviews={m.reviews} specs={m.specs} />
+        <FlipkartDetails tone={w.id} open={more} onOpenChange={setMore} />
       </div>
     </article>
   );

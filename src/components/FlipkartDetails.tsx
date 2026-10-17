@@ -1,6 +1,6 @@
 import { ShoppingCart, Zap, Star, Tag, ShieldCheck, RotateCcw, Truck } from 'lucide-react';
 import { toast } from 'sonner';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 import steelJpg from '@/assets/watch-steel.jpg';
 import blackJpg from '@/assets/watch-black.jpg';
@@ -18,6 +18,7 @@ import steelLife from '@/assets/lifestyle-steel.jpg';
 import blackLife from '@/assets/lifestyle-black.jpg';
 import goldLife from '@/assets/lifestyle-gold.jpg';
 import roseLife from '@/assets/lifestyle-rosegold.jpg';
+import { cardMeta } from '@/lib/watch-meta';
 const VID_PREFIX = 'spin:';
 const FEAT = 'feat:';
 const isFeat = (s?: string) => !!s && s.startsWith(FEAT);
@@ -41,19 +42,22 @@ import { watches, type WatchTone } from '@/lib/watches';
 const usd = (n: number) => n.toLocaleString('en-US');
 
 export function FlipkartDetails({
-  tone, open, onOpenChange, list, rating, reviews, specs,
-}: { tone: WatchTone; open: boolean; onOpenChange: (o: boolean) => void; list: number; rating: number; reviews: number; specs: string[] }) {
-  const w = watches.find((x) => x.id === tone)!;
+  tone, open, onOpenChange,
+}: { tone: WatchTone; open: boolean; onOpenChange: (o: boolean) => void }) {
+  const [pick, setPick] = useState<WatchTone | null>(null);
+  const active = pick ?? tone;
+  const m = cardMeta[active];
+  const w = watches.find((x) => x.id === active)!;
   const price = prices[w.id];
   const anims = [`${VID_PREFIX}3d|${w.id}`];
   const imgs = [w.image, `${FEAT}${w.id}`, life[w.id], ...extra[w.id], ...anims];
-  const feat = <FeatureCard img={w.image} labels={specs} />;
+  const feat = <FeatureCard img={w.image} labels={m.specs} />;
   const [dial, setDial] = useState('42 mm');
   const [idx, setIdx] = useState(0);
   const [full, setFull] = useState(false);
   const [zoom, setZoom] = useState(false);
   const go = (d: number) => { setZoom(false); setIdx((i) => (i + d + imgs.length) % imgs.length); };
-  const off = Math.round((1 - price / list) * 100);
+  const off = Math.round((1 - price / m.list) * 100);
   const table: [string, string][] = [
     ['Model Name', `Private Flight ${w.name}`],
     ['Dial Color', w.details[0]],
@@ -64,9 +68,11 @@ export function FlipkartDetails({
     ['Water Resistance', '100 m'],
     ['Display Type', 'Analog'],
     ['Ideal For', 'Men'],
-    ...specs.map((s, i) => [['Case Size', 'Feature', 'Movement'][i] ?? 'Feature', s] as [string, string]),
+    ...m.specs.map((s, i) => [['Case Size', 'Feature', 'Movement'][i] ?? 'Feature', s] as [string, string]),
     ['Warranty', '2 Years manufacturer warranty'],
   ];
+  useEffect(() => { if (!open) setPick(null); }, [open]);
+  useEffect(() => { setIdx(0); setZoom(false); setFull(false); }, [active]);
   return (
     <>
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -84,11 +90,11 @@ export function FlipkartDetails({
             <DialogTitle className="fk-title">{w.name}</DialogTitle>
             <p className="fk-subtitle">{w.details[0]} · analog automatic</p>
             <div className="fk-rating-row">
-              <Star size={13} fill="currentColor" /><span>{rating}</span><span className="fk-muted">— {usd(reviews)} reviews</span>
+              <Star size={13} fill="currentColor" /><span>{m.rating}</span><span className="fk-muted">— {usd(m.reviews)} reviews</span>
             </div>
             <div className="fk-price-row">
               <span className="fk-price">${usd(price)}</span>
-              <s className="fk-muted">${usd(list)}</s>
+              <s className="fk-muted">${usd(m.list)}</s>
               <span className="fk-off">Save {off}%</span>
             </div>
             <div className="fk-section">
@@ -112,7 +118,7 @@ export function FlipkartDetails({
             </div>
             <div className="fk-section">
               <h4>Highlights</h4>
-              <ul className="fk-highlights">{[...w.details, ...specs].map((d) => <li key={d}>{d}</li>)}</ul>
+              <ul className="fk-highlights">{[...w.details, ...m.specs].map((d) => <li key={d}>{d}</li>)}</ul>
             </div>
             <div className="fk-section">
               <h4>Privileges</h4>
@@ -124,6 +130,19 @@ export function FlipkartDetails({
             <div className="fk-section">
               <h4>Specifications</h4>
               <dl className="fk-table">{table.map(([k, v]) => <div key={k + v}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+            </div>
+            <div className="fk-section">
+              <h4>You may also like</h4>
+              <div className="fk-recs">
+                {watches.filter((r) => r.id !== active).map((r) => (
+                  <button type="button" key={r.id} className="fk-rec" onClick={() => setPick(r.id)}>
+                    <img src={r.image} alt={r.name} />
+                    <span className="fk-rec-name">{r.name}</span>
+                    <span className="fk-rec-sub">{r.finish}</span>
+                    <span className="fk-rec-price">${usd(prices[r.id])}</span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
