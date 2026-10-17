@@ -90,12 +90,19 @@ export function FlipkartDetails({
             <DialogTitle className="fk-title">{w.name}</DialogTitle>
             <p className="fk-subtitle">{w.details[0]} · analog automatic</p>
             <div className="fk-rating-row">
-              <Star size={13} fill="currentColor" /><span>{m.rating}</span><span className="fk-muted">— {usd(m.reviews)} reviews</span>
+              <span className="fk-rating-chip">{m.rating} <Star size={11} fill="currentColor" /></span>
+              <span className="fk-muted">{usd(m.reviews)} ratings &amp; reviews</span>
             </div>
+            <p className="fk-special">Special Price</p>
             <div className="fk-price-row">
               <span className="fk-price">${usd(price)}</span>
               <s className="fk-muted">${usd(m.list)}</s>
-              <span className="fk-off">Save {off}%</span>
+              <span className="fk-off">{off}% off</span>
+            </div>
+            <div className="fk-delivery">
+              <div className="fk-delivery-row"><Truck size={16} /><span>Delivery by <b>{deliveryDate}</b> <span className="fk-delivery-free">| Free</span></span></div>
+              <div className="fk-delivery-row"><RotateCcw size={16} /><span><b>7 days</b> Replacement Policy</span></div>
+              <div className="fk-delivery-row"><ShieldCheck size={16} /><span><b>2 Year</b> Manufacturer Warranty</span></div>
             </div>
             <div className="fk-section">
               <h4>Case size <span className="fk-muted">{dial}</span></h4>
