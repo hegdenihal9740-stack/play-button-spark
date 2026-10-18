@@ -10,3 +10,5 @@
 <!-- LOVABLE:END -->
 
 - Keep try-on crown direction aligned with wrist-to-fingers: rotate the whole photo layer in the static showcase, and preserve the shared arm-axis attachment in live 3D, so dial and bracelet cannot diverge.
+- CustomerAccounts owns the single root auth subscriber and customer state; public account and recovery routes use Cloud Auth, with private profile access enforced by database ownership policies.
+- Real watch checkout requires an approved commerce connection; never report a cart toast or cleared cart as a completed purchase.
