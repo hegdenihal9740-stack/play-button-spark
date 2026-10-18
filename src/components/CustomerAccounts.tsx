@@ -5,6 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { UserRound } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
+import '@/account-styles.css';
 
 const CustomerContext = createContext<{ user: User | null; ready: boolean }>({ user: null, ready: false });
 export const useCustomer = () => useContext(CustomerContext);
@@ -27,7 +28,7 @@ export function CustomerAccounts({ children }: { children: ReactNode }) {
   }, [router, queryClient]);
   return <CustomerContext.Provider value={{ user, ready }}>
     {children}
-    <div className="fixed right-4 top-4 z-40 flex items-center gap-2">
+    <div className="customer-account-access flex items-center gap-2">
       <Button asChild variant="outline" className="bg-background text-foreground" size="sm">
         <Link to="/auth"><UserRound />{user ? 'My account' : 'Login / Register'}</Link>
       </Button>

@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
 import { useEffect, useState, type FormEvent } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
@@ -81,13 +81,10 @@ function AuthPage() {
         {error && <p role="alert" className="text-sm text-destructive">{error}</p>}{message && <p role="status" className="text-sm text-foreground">{message}</p>}
         <Button disabled={busy} className="w-full" type="submit">{busy ? 'Please wait…' : user ? 'Save profile' : mode === 'register' ? 'Create account' : mode === 'forgot' ? 'Send reset link' : 'Sign in'}</Button>
       </form>
-      {user ? <div className="mt-6 flex flex-wrap gap-2"><Button asChild variant="outline"><RouteLink /></Button><Button variant="ghost" disabled={busy} onClick={signOut}>Sign out</Button></div> : <>
+      {user ? <div className="mt-6 flex flex-wrap gap-2"><Button asChild variant="outline"><Link to="/">Continue shopping</Link></Button><Button variant="ghost" disabled={busy} onClick={signOut}>Sign out</Button></div> : <>
         <Button variant="link" className="my-4 px-0" onClick={() => changeMode(mode === 'forgot' ? 'login' : 'forgot')}>{mode === 'forgot' ? 'Back to login' : 'Forgot password?'}</Button>
         {mode !== 'forgot' && <div className="space-y-3 border-t border-border pt-5"><Button variant="outline" className="w-full" disabled={busy} onClick={() => social('google')}>Continue with Google</Button><Button className="lovable-auth-button w-full" disabled={busy} onClick={() => social('lovable')}>Continue with Lovable</Button></div>}
       </>}
     </>}
   </AccountLayout>;
 }
-
-import { Link } from '@tanstack/react-router';
-function RouteLink() { return <Link to="/">Continue shopping</Link>; }

@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { cart, useCart } from '@/lib/cart';
 import { watches } from '@/lib/watches';
+import { Button } from '@/components/ui/button';
 
 export function CartDrawer() {
   const { items, open, count } = useCart();
@@ -19,7 +20,8 @@ export function CartDrawer() {
         </SheetHeader>
         {items.length === 0 ? <p className="cart-empty">Your bag is empty. Add a timepiece from the collection.</p> :
           <ul className="cart-list">{items.map(item => {
-            const w = watches.find(x => x.id === item.id)!;
+            const w = watches.find(x => x.id === item.id);
+            if (!w) return null;
             return <li key={item.id} className="cart-row">
               <img src={w.image} alt="" />
               <div className="cart-row-info">
@@ -35,7 +37,7 @@ export function CartDrawer() {
           })}</ul>}
         {items.length > 0 && <div className="cart-footer">
           
-          <button type="button" className="cart-checkout" onClick={() => { toast.success('Thank you — our concierge will contact you to complete your order.'); cart.clear(); cart.setOpen(false); }}>Checkout</button>
+          <Button type="button" className="cart-checkout" onClick={() => toast.info('Checkout is not available yet. No order has been placed and your bag has been kept.')}>Checkout</Button>
         </div>}
       </SheetContent>
     </Sheet>
