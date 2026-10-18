@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Add customer registration, login, profile editing and password recovery on this website.
+- [x] Add customer registration, login, profile editing and password recovery on this website.
+- [ ] Verify confirmed-account sign-in and saved profile end-to-end — needs the first customer to register and confirm their email.
 - [ ] Connect real watch checkout and order management — blocked until a store connection is approved.
 
 - [x] Redesign the private jet (obsidian stealth style, gold trim, twin V-tails)
