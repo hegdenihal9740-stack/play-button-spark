@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Add customer registration, login, profile editing and password recovery on this website.
+- [ ] Connect real watch checkout and order management — blocked until a store connection is approved.
+
 - [x] Redesign the private jet (obsidian stealth style, gold trim, twin V-tails)
 - [x] Fix layout alignment: excess empty space on sides and above sections on the home page
 - [x] Verify jet redesign renders correctly in preview
